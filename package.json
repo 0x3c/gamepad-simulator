@@ -4,12 +4,16 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "build": "rm -rf lib && mkdir lib && babel src -d lib "
+    "build": "rm -rf lib && mkdir lib && babel src -d lib"
   },
-  "author": "",
+  "author": "Samuel Chia",
   "license": "ISC",
   "dependencies": {
     "antd": "^3.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funwithes/gamepad-simulator.git"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

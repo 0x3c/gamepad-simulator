@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import GamaPadButton from "./GamaPadButton";
 
 export default class GamepadSimulator extends Component {
@@ -18,18 +17,27 @@ export default class GamepadSimulator extends Component {
       disableLeft,
       enableRight,
       disableRight,
-      enableGo,
-      disableGo,
-      enableBack,
-      disableBack,
-      style
+      enableForward,
+      disableForward,
+      enableBackward,
+      disableBackward,
+      style,
+      blockStyle
+    } = this.props;
+    const {
+      upNode,
+      downNode,
+      leftNode,
+      rightNode,
+      forwardNode,
+      backwardNode
     } = this.props;
     return (
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          fontSize: 40,
+          fontSize: 20,
           ...style
         }}
       >
@@ -38,7 +46,8 @@ export default class GamepadSimulator extends Component {
             width: 100,
             height: 100,
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            ...blockStyle
           }}
         >
           <div
@@ -49,7 +58,7 @@ export default class GamepadSimulator extends Component {
             }}
           >
             <GamaPadButton onStart={enableUp} onEnd={disableUp}>
-              <Icon type="arrow-up" />
+              {upNode}
             </GamaPadButton>
           </div>
           <div
@@ -60,11 +69,11 @@ export default class GamepadSimulator extends Component {
             }}
           >
             <GamaPadButton onStart={enableLeft} onEnd={disableLeft}>
-              <Icon type="arrow-left" />
+              {leftNode}
             </GamaPadButton>
 
             <GamaPadButton onStart={enableRight} onEnd={disableRight}>
-              <Icon type="arrow-right" />
+              {rightNode}
             </GamaPadButton>
           </div>
           <div
@@ -75,7 +84,7 @@ export default class GamepadSimulator extends Component {
             }}
           >
             <GamaPadButton onStart={enableDown} onEnd={disableDown}>
-              <Icon type="arrow-down" />
+              {downNode}
             </GamaPadButton>
           </div>
         </div>
@@ -85,14 +94,15 @@ export default class GamepadSimulator extends Component {
             height: 100,
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
+            ...blockStyle
           }}
         >
-          <GamaPadButton onStart={enableGo} onEnd={disableGo}>
-            <Icon type="up" />
+          <GamaPadButton onStart={enableForward} onEnd={disableForward}>
+            {forwardNode}
           </GamaPadButton>
-          <GamaPadButton onStart={enableBack} onEnd={disableBack}>
-            <Icon type="down" />
+          <GamaPadButton onStart={enableBackward} onEnd={disableBackward}>
+            {backwardNode}
           </GamaPadButton>
         </div>
       </div>
@@ -109,9 +119,17 @@ GamepadSimulator.propTypre = {
   disableLeft: PropTypes.func,
   enableRight: PropTypes.func,
   disableRight: PropTypes.func,
-  enableGo: PropTypes.func,
-  disableGo: PropTypes.func,
-  enableBack: PropTypes.func,
-  disableBack: PropTypes.func,
-  style: PropTypes.object
+  enableForward: PropTypes.func,
+  disableForward: PropTypes.func,
+  enableBackward: PropTypes.func,
+  disableBackward: PropTypes.func,
+  style: PropTypes.object,
+  blockStyle: PropTypes.object,
+
+  upNode: PropTypes.node,
+  downNode: PropTypes.node,
+  leftNode: PropTypes.node,
+  rightNode: PropTypes.node,
+  forwardNode: PropTypes.node,
+  backwardNode: PropTypes.node
 };

@@ -1,13 +1,35 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button } from "antd";
+
+class Button extends React.PureComponent {
+  render() {
+    const { children, style, ...params } = this.props;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minWidth: 20,
+          minHeight: 20,
+          ...style
+        }}
+        {...params}
+      >
+        {children}
+      </div>
+    );
+  }
+}
 
 export default class GamaPadButton extends Component {
   state = {
     isEnd: true
   };
   componentDidMount() {
-    this.instanceNode = this.button._reactInternalFiber.child.stateNode;
+    this.instanceNode =
+      this.button && this.button._reactInternalFiber.child.stateNode;
+    console.log(this.instanceNode);
   }
   render() {
     const { children, style } = this.props;
@@ -24,7 +46,6 @@ export default class GamaPadButton extends Component {
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         style={{ cursor: "pointer", ...style }}
-        shape="circle"
       >
         {children}
       </Button>

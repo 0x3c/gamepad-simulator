@@ -10,16 +10,16 @@ export default class GamaPadButton extends Component {
     this.instanceNode = this.button._reactInternalFiber.child.stateNode;
   }
   render() {
-    const { children, onStart, onEnd, style } = this.props;
+    const { children, style } = this.props;
     return (
       <Button
         ref={button => (this.button = button)}
         onMouseLeave={this.onMouseLeave}
-        onTouchCancel={onEnd}
-        onTouchEnd={onEnd}
+        onTouchCancel={this._onEnd}
+        onTouchEnd={this._onEnd}
         onTouchMove={this.onMove}
         onTouchLeave={e => console.log("leave")}
-        onTouchStart={onStart}
+        onTouchStart={this._onStart}
         onContextMenu={e => e.preventDefault()}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
@@ -30,11 +30,21 @@ export default class GamaPadButton extends Component {
       </Button>
     );
   }
+  _onStart = e => {
+    this.setState({ isEnd: false });
+    this.props.onStart && this.props.onStart(e);
+  };
+  _onEnd = e => {
+    if (this.state.isEnd) {
+      return;
+    }
+    this.setState({ isEnd: true });
+    this.props.onEnd && this.props.onEnd(e);
+  };
   onMove = e => {
     const { clientX, clientY } = e.touches[0];
     if (this.checkTouchLeave(clientX, clientY)) {
-      // console.log(Object.keys(e).filter(key => typeof e[key] === "function"));
-      console.log(e.identifier);
+      this._onEnd(e);
     }
   };
   checkTouchLeave = (pointX, pointY) => {

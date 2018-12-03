@@ -29,7 +29,6 @@ export default class GamaPadButton extends Component {
   componentDidMount() {
     this.instanceNode =
       this.button && this.button._reactInternalFiber.child.stateNode;
-    console.log(this.instanceNode);
   }
   render() {
     const { children, style } = this.props;

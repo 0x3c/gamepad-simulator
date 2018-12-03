@@ -9,8 +9,6 @@ client/src/commonModel/node_modules/**/.babelrc
 # production
 /build
 
-# build
-/lib
 
 # misc
 .DS_Store
